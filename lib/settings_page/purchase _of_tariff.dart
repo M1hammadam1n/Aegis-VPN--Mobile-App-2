@@ -135,22 +135,37 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                               ),
 
                               // Правая часть
+                              // Правая часть
                               Row(
                                 children: [
-                                  Container(
-                                    width: w * 0.38,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.3),
-                                      borderRadius: BorderRadius.circular(20),
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      // Минимум 90px, максимум 38% ширины экрана
+                                      minWidth: w * 0.25,
+                                      maxWidth: w * 0.35,
                                     ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      tariff['price']!,
-                                      style: TextStyle(
-                                        fontSize: priceFont,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
+                                    child: Container(
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.3),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: w * 0.02,
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          tariff['price']!,
+                                          style: TextStyle(
+                                            fontSize:
+                                                (w * 0.042).clamp(11.0, 16.0) *
+                                                textScale,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -177,7 +192,7 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                     );
                   }),
 
-                  SizedBox(height: h * 0.10),
+                  SizedBox(height: h * 0.08),
 
                   // Кнопка "Приобрести"
                   SizedBox(
@@ -213,36 +228,38 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                     ),
                   ),
 
-                  SizedBox(height: h * 0.02), // отступ под кнопкой
-                 RichText(
-  textAlign: TextAlign.center,
-  text: TextSpan(
-    style: TextStyle(
-      color: Colors.white30,
-      fontSize: (w * 0.032).clamp(10.0, 14.0),
-      fontWeight: FontWeight.w400,
-    ),
-    children: [
-      const TextSpan(text: 'Автоматическая оплата. Можно отменить в любой момент.\n'),
-      TextSpan(
-        text: 'Политика конфиденциальности',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      const TextSpan(text: ' и '),
-      TextSpan(
-        text: 'Правила пользования',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-    ],
-  ),
-),
-
+                  SizedBox(height: h * 0.01), // отступ под кнопкой
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white30,
+                        fontSize: (w * 0.032).clamp(10.0, 14.0),
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: [
+                        const TextSpan(
+                          text:
+                              'Автоматическая оплата. Можно отменить в любой момент.\n',
+                        ),
+                        TextSpan(
+                          text: 'Политика конфиденциальности',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const TextSpan(text: ' и '),
+                        TextSpan(
+                          text: 'Правила пользования',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

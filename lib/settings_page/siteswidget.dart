@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:flutter_svg/svg.dart';
+
 class SitesWidget extends StatefulWidget {
   const SitesWidget({super.key});
 
@@ -20,7 +22,7 @@ class _SitesWidgetState extends State<SitesWidget> {
       barrierLabel: "Добавить сайт",
       barrierDismissible: true,
       barrierColor: Colors.black.withOpacity(0.9),
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (context, anim1, anim2) {
         return Align(
           alignment: Alignment.topCenter,
@@ -41,7 +43,14 @@ class _SitesWidgetState extends State<SitesWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/Frame 2085661621.png'),
+                        SizedBox(
+                          height: 70,
+                          width: 70,
+                          child: SvgPicture.asset(
+                            'assets/icons/55.svg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         SizedBox(height: 15),
                         const Text(
                           'Добавьте сайт',

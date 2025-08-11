@@ -7,27 +7,32 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Получаем размеры экрана
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
 
-    // Динамические размеры шрифтов и отступов
-    double titleFontSize = width * 0.08; // примерно 8% ширины экрана
-    if (titleFontSize > 36) titleFontSize = 36; // максимум 36
-    double subtitleFontSize = width * 0.035;
-    if (subtitleFontSize > 16) subtitleFontSize = 16;
-    double buttonHeight = height * 0.08; // высота кнопок 8% высоты экрана
-    if (buttonHeight < 55) buttonHeight = 55; // минимум 55
+    // Базовые размеры под которые верстался макет
+    const baseWidth = 390.0;
+    const baseHeight = 844.0;
+
+    // Коэффициенты масштабирования
+    final scaleW = width / baseWidth;
+    final scaleH = height / baseHeight;
+    final scale = scaleW < scaleH ? scaleW : scaleH; // чтобы не перекашивало
+
+    // Динамические размеры с учетом масштаба
+    double titleFontSize = (28 * scale).clamp(20, 36);
+    double subtitleFontSize = (14 * scale).clamp(12, 16);
+    double buttonHeight = (60 * scale).clamp(50, 70);
+    double iconSize = (24 * scale).clamp(18, 28);
 
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           children: [
-            // Верхняя картинка с динамической высотой (примерно 20% высоты экрана)
             Padding(
-              padding: EdgeInsets.only(top: height * 0.03),
+              padding: EdgeInsets.only(top: 24 * scale),
               child: SizedBox(
                 height: height * 0.2,
                 width: double.infinity,
@@ -38,11 +43,9 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
 
-            // Основная часть с фоном и содержимым (текст + кнопки)
             Expanded(
               child: Stack(
                 children: [
-                  // Фон — картинка с градиентом поверх
                   Positioned.fill(
                     child: Stack(
                       fit: StackFit.expand,
@@ -70,19 +73,12 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Содержимое поверх фона: текст и кнопки
                   Padding(
-                    padding: EdgeInsets.only(
-                      bottom: height * 0.03,
-                      left: width * 0.05,
-                      right: width * 0.05,
-                      top: height * 0.1,
-                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20 * scale,
+                    ).copyWith(top: height * 0.1, bottom: 24 * scale),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Тексты
                         Text(
                           'Вход в аккаунт',
                           style: TextStyle(
@@ -92,7 +88,7 @@ class SignInScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: height * 0.01),
+                        SizedBox(height: 8 * scale),
                         Text(
                           'Войдите в аккаунт любым удобным \nдля вас методом, доступным ниже.',
                           style: TextStyle(
@@ -101,9 +97,10 @@ class SignInScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+
                         const Spacer(),
 
-                        // Кнопки с динамическими размерами
+                        // Пример кнопки с иконкой
                         SizedBox(
                           width: double.infinity,
                           height: buttonHeight,
@@ -118,29 +115,26 @@ class SignInScreen extends StatelessWidget {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                vertical: buttonHeight * 0.25,
-                              ),
                               overlayColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12 * scale),
+                              ),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  Icons.email,
-                                  color: Colors.black,
-                                  size: buttonHeight * 0.4,
+                                SvgPicture.asset(
+                                  'assets/icons/66666.svg',
+                                  width: iconSize,
+                                  height: iconSize,
                                 ),
-                                SizedBox(width: width * 0.02),
+                                SizedBox(width: 8 * scale),
                                 Text(
                                   'Войти с E-Mail',
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: buttonHeight * 0.3,
+                                    fontSize: (16 * scale).clamp(12, 20),
                                   ),
                                 ),
                               ],
@@ -168,11 +162,8 @@ class SignInScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(
-                                  Icons.telegram,
-                                  color: Colors.blue,
-                                  size: buttonHeight * 0.45,
-                                ),
+                                // size: buttonHeight * 0.45,
+                                SvgPicture.asset('assets/icons/Telegram.svg'),
                                 SizedBox(width: width * 0.02),
                                 Text(
                                   'Войти с Telegram',
@@ -208,10 +199,8 @@ class SignInScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(
-                                        Icons.apple,
-                                        color: Colors.white,
-                                        size: buttonHeight * 0.45,
+                                      SvgPicture.asset(
+                                        'assets/icons/AppleOriginal.svg',
                                       ),
                                       SizedBox(width: width * 0.02),
                                       Text(

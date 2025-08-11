@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class PaymentSuccessPage extends StatelessWidget {
   const PaymentSuccessPage({super.key});
@@ -22,8 +23,8 @@ class PaymentSuccessPage extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Image.asset(
-                    'assets/images/Frame 2085661620.png',
+                  SvgPicture.asset(
+                    'assets/icons/Frame552085661620.svg',
                     width: size.width * 0.2,
                     fit: BoxFit.contain,
                   ),
@@ -54,8 +55,7 @@ class PaymentSuccessPage extends StatelessWidget {
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {
-                    Navigator.pop(context);
-
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

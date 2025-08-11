@@ -2,6 +2,7 @@ import 'package:aegis_vpn/general/general_screens.dart';
 import 'package:aegis_vpn/servers_pages/servers_page.dart';
 import 'package:aegis_vpn/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NavigationExample extends StatefulWidget {
   const NavigationExample({super.key});
@@ -9,6 +10,7 @@ class NavigationExample extends StatefulWidget {
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
 }
+
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 1; // Начинаем с GeneralScreens (индекс 1)
 
@@ -73,40 +75,43 @@ class _NavigationExampleState extends State<NavigationExample> {
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>((states) {
           return TextStyle(
-            color: states.contains(MaterialState.selected) ? Colors.white : Colors.grey,
+            color:
+                states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : Colors.grey,
             fontSize: 14,
           );
         }),
         destinations: [
           NavigationDestination(
-            icon: Image.asset(
-              'assets/images/nav icon 1.png',
+            icon: SvgPicture.asset(
+              'assets/icons/4444444.svg',
               color: currentPageIndex == 0 ? Colors.white : Colors.grey,
             ),
-            selectedIcon: Image.asset(
-              'assets/images/nav icon 1 2.png',
+            selectedIcon: SvgPicture.asset(
+              'assets/icons/333333.svg',
               color: currentPageIndex == 0 ? Colors.white : Colors.grey,
             ),
             label: 'Сервера',
           ),
           NavigationDestination(
-            icon: Image.asset(
-              'assets/images/nav icon 2 2.png',
+            icon: SvgPicture.asset(
+              'assets/icons/nav 2 2.svg',
               color: currentPageIndex == 1 ? Colors.white : Colors.grey,
             ),
-            selectedIcon: Image.asset(
-              'assets/images/nav icon 2 1.png',
+            selectedIcon: SvgPicture.asset(
+              'assets/icons/nav 2 1.svg',
               color: currentPageIndex == 1 ? Colors.white : Colors.grey,
             ),
             label: 'Главная',
           ),
           NavigationDestination(
-            icon: Image.asset(
-              'assets/images/nav icon 3 1.png',
+            icon: SvgPicture.asset(
+              'assets/icons/nav 3 2.svg',
               color: currentPageIndex == 2 ? Colors.white : Colors.white,
             ),
-            selectedIcon: Image.asset(
-              'assets/images/nav ivon 3 2.png',
+            selectedIcon: SvgPicture.asset(
+              'assets/icons/nav 3 1 .svg',
               color: currentPageIndex == 2 ? Colors.white : Colors.white,
             ),
             label: 'Настройки',

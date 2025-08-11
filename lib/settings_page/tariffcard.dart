@@ -1,12 +1,14 @@
 import 'package:aegis_vpn/settings_page/purchase%20_of_tariff.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SubscriptionManager {
   TariffData? activeTariff;
 
   // Singleton
   SubscriptionManager._privateConstructor();
-  static final SubscriptionManager _instance = SubscriptionManager._privateConstructor();
+  static final SubscriptionManager _instance =
+      SubscriptionManager._privateConstructor();
   factory SubscriptionManager() => _instance;
 }
 
@@ -15,7 +17,11 @@ class TariffData {
   final String subtitle;
   final String price;
 
-  TariffData({required this.duration, required this.subtitle, required this.price});
+  TariffData({
+    required this.duration,
+    required this.subtitle,
+    required this.price,
+  });
 }
 
 class SubscriptionScreen extends StatefulWidget {
@@ -35,9 +41,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   }
 
   void _goToPurchase() async {
-    await Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(builder: (_) => const PurchaseOfTariff()),
-    );
+    await Navigator.of(
+      context,
+      rootNavigator: true,
+    ).push(MaterialPageRoute(builder: (_) => const PurchaseOfTariff()));
 
     // Обновляем состояние после возврата (вдруг тариф изменился)
     setState(() {
@@ -55,11 +62,14 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           // Масштабируем размеры шрифтов и отступов под ширину контейнера
           double baseFontSizeTitle = 24;
           double baseFontSizeSubtitle = 15;
-          double titleFontSize = baseFontSizeTitle * (maxWidth / 360).clamp(0.8, 1.2);
-          double subtitleFontSize = baseFontSizeSubtitle * (maxWidth / 360).clamp(0.8, 1.2);
+          double titleFontSize =
+              baseFontSizeTitle * (maxWidth / 360).clamp(0.8, 1.2);
+          double subtitleFontSize =
+              baseFontSizeSubtitle * (maxWidth / 360).clamp(0.8, 1);
           double buttonFontSize = 20 * (maxWidth / 360).clamp(0.8, 1.2);
           double paddingAll = 20 * (maxWidth / 360).clamp(0.8, 1.2);
-          double buttonHorizontalPadding = 40 * (maxWidth / 360).clamp(0.8, 1.2);
+          double buttonHorizontalPadding =
+              40 * (maxWidth / 360).clamp(0.8, 1.2);
           double buttonVerticalPadding = 15 * (maxWidth / 360).clamp(0.8, 1.2);
           double iconSize = 20 * (maxWidth / 360).clamp(0.8, 1.2);
 
@@ -92,35 +102,77 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   textAlign: TextAlign.start,
                 ),
                 SizedBox(height: 20 * (maxWidth / 360).clamp(0.8, 1.2)),
-                ElevatedButton(
-                  onPressed: _goToPurchase,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: buttonHorizontalPadding,
-                      vertical: buttonVerticalPadding,
-                    ),
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/images/icon 9.png', width: iconSize, height: iconSize),
-                      SizedBox(width: 6 * (maxWidth / 360).clamp(0.8, 1.2)),
-                      Text(
-                        'Купить подписку',
-                        style: TextStyle(
-                          fontSize: buttonFontSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 55,
+                      child: ElevatedButton(
+                        onPressed: _goToPurchase,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          overlayColor: Colors.black,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/10.svg',
+                              width: iconSize,
+                              height: iconSize,
+                            ),
+                            const Text(
+                              '  Купить подписку',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                // ElevatedButton(
+                //   onPressed: _goToPurchase,
+                //   style: ElevatedButton.styleFrom(
+                //     padding: EdgeInsets.symmetric(
+                //       horizontal: buttonHorizontalPadding,
+                //       vertical: buttonVerticalPadding,
+                //     ),
+                //     backgroundColor: Colors.white,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(30),
+                //     ),
+                //   ),
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.min,
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       SvgPicture.asset(
+                //         'assets/icons/10.svg',
+                //         width: iconSize,
+                //         height: iconSize,
+                //       ),
+                //       SizedBox(width: 6 * (maxWidth / 360).clamp(0.8, 1.2)),
+                //       Text(
+                //         'Купить подписку',
+                //         style: TextStyle(
+                //           fontSize: buttonFontSize,
+                //           fontWeight: FontWeight.bold,
+                //           color: Colors.black,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           );
@@ -131,7 +183,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       return LayoutBuilder(
         builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          final maxHeight = constraints.maxHeight > 0 ? constraints.maxHeight : 120.0;
+          final maxHeight =
+              constraints.maxHeight > 0 ? constraints.maxHeight : 120.0;
 
           // Масштабируем шрифты и размеры элементов под доступный размер
           double baseHeight = 120;
@@ -185,7 +238,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             ),
                             decoration: BoxDecoration(
                               color: const Color(0xFF463620),
-                              borderRadius: BorderRadius.circular(20 * heightFactor),
+                              borderRadius: BorderRadius.circular(
+                                20 * heightFactor,
+                              ),
                             ),
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
@@ -208,7 +263,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             ),
                             decoration: BoxDecoration(
                               color: const Color(0xFF463620),
-                              borderRadius: BorderRadius.circular(20 * heightFactor),
+                              borderRadius: BorderRadius.circular(
+                                20 * heightFactor,
+                              ),
                             ),
                             child: FittedBox(
                               fit: BoxFit.scaleDown,

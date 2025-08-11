@@ -75,49 +75,69 @@ class _SingUpSmsState extends State<SingUpSms> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    // Базовые размеры от высоты экрана (можно подстроить)
+    final verticalSpacingLarge = height * 0.06; // вместо 50
+    final verticalSpacingSmall = height * 0.01; // вместо 8
+    final inputBoxWidth =
+        (width - 32 - 5 * 10) / 6; // горизонтальные паддинги + промежутки
+    final inputBoxHeight = height * 0.07; // около 55 при экране 6.6 дюймов
+
+    // Шрифты с масштабированием
+    final titleFontSize = height * 0.045; // около 36
+    final subtitleFontSize = height * 0.02; // около 16
+    final codeFontSize = height * 0.03; // около 24
+    final buttonFontSize = height * 0.025; // около 20
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.04), // вместо 16
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Верхний блок
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  SizedBox(height: 50),
+                children: [
+                  SizedBox(height: verticalSpacingLarge),
                   Text(
-                    'Попробовать снова',
+                    'Подтверждение',
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: titleFontSize,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: verticalSpacingSmall),
                   Text(
                     'Введите 6-ти значный код, который находится в письме, отправленный на вашу эл. почту.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white54,
-                      fontSize: 16,
+                      fontSize: subtitleFontSize,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
                 ],
               ),
 
-              const SizedBox(height: 40),
+              SizedBox(height: height * 0.05),
 
               // Поля ввода кода
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(codeLength, (index) {
                   return SizedBox(
-                    width: 45,
-                    height: 55,
+                    width: inputBoxWidth.clamp(
+                      40,
+                      60,
+                    ), // ограничиваем по ширине
+                    height: inputBoxHeight.clamp(45, 65),
                     child: RawKeyboardListener(
                       focusNode: FocusNode(),
                       onKey: (event) => _onKey(event, index),
@@ -128,9 +148,9 @@ class _SingUpSmsState extends State<SingUpSms> {
                         textAlign: TextAlign.center,
                         maxLength: 1,
                         cursorColor: Colors.white,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24,
+                          fontSize: codeFontSize,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -168,10 +188,10 @@ class _SingUpSmsState extends State<SingUpSms> {
               // Ошибка поверх кнопки
               if (_showError)
                 Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
+                  margin: EdgeInsets.only(bottom: height * 0.015),
+                  padding: EdgeInsets.symmetric(
+                    vertical: height * 0.015,
+                    horizontal: width * 0.04,
                   ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF191919),
@@ -180,10 +200,13 @@ class _SingUpSmsState extends State<SingUpSms> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'Пожалуйста, введите полный код',
-                          style: TextStyle(color: Colors.white38, fontSize: 16),
+                          'Не пришёл код? Проверьте папку "Спам" или попробуйте снова.',
+                          style: TextStyle(
+                            color: Colors.white38,
+                            fontSize: subtitleFontSize,
+                          ),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -194,7 +217,6 @@ class _SingUpSmsState extends State<SingUpSms> {
                         ),
                         child: IconButton(
                           onPressed: () {
-                            // Можно добавить логику повтора отправки кода
                             setState(() {
                               _showError = false;
                               for (var c in _controllers) {
@@ -212,30 +234,36 @@ class _SingUpSmsState extends State<SingUpSms> {
                   ),
                 ),
 
-              // Кнопки
               SizedBox(
                 width: double.infinity,
-                height: 55,
+                height: height * 0.07,
                 child: ElevatedButton(
                   onPressed: _validateAndNavigate,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.012),
                   ),
-                  child: const Text(
-                    'Продолжить',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                    textAlign: TextAlign.center,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'Продолжить',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: buttonFontSize,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+
+              SizedBox(height: height * 0.008),
               SizedBox(
                 width: double.infinity,
-                height: 55,
+                height: height * 0.07,
                 child: ElevatedButton(
                   onPressed: () {
                     // Логика повторной отправки кода или возврата назад
@@ -243,13 +271,16 @@ class _SingUpSmsState extends State<SingUpSms> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white12,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.023),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Попробовать снова',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: buttonFontSize,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),

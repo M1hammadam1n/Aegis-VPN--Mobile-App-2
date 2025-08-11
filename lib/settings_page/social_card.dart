@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SocialCard extends StatelessWidget {
   final String title;
@@ -20,56 +21,96 @@ class SocialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      padding: const EdgeInsets.all(12.0),
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 45,
-                height: 45,
-                child: Image.asset(assetImagePath),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isSmallScreen = screenWidth < 350;
+
+    // Максимальная высота карточки — примерно 25% высоты экрана, но минимум 120
+    final maxCardHeight =
+        screenHeight * 0.20 < 120 ? 120.0 : screenHeight * 0.25;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        constraints: BoxConstraints(
+          minWidth: isSmallScreen ? 130 : 150,
+          maxWidth: isSmallScreen ? 170 : 200,
+          maxHeight: maxCardHeight,
+          minHeight: 100,
+        ),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: EdgeInsets.all(isSmallScreen ? 10.0 : 12.0),
+        child: Stack(
+          children: [
+            // Основной контент слева сверху
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: isSmallScreen ? 40 : 45,
+                  height: isSmallScreen ? 40 : 40,
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: SvgPicture.asset(assetImagePath),
+                  ),
                 ),
-              ),
-              Text(
-                subtitle,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white30,
+                SizedBox(height: isSmallScreen ? 6 : 8),
+                Flexible(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 18 : 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Checkbox(
-              value: value,
-              onChanged: onChanged,
-              activeColor: Colors.white,
-              checkColor: Colors.black,
-              side: const BorderSide(color: Colors.white),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50), // круглый чекбокс
-              ),
+                Flexible(
+                  child: Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 16 : 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white30,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+
+            // Checkbox справа внизу
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Checkbox(
+                      value: value,
+                      onChanged: onChanged,
+                      activeColor: Colors.white,
+                      checkColor: Colors.black,
+                      side: const BorderSide(color: Colors.white),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:aegis_vpn/settings_page/domain_switch.dart';
 import 'package:aegis_vpn/settings_page/siteswidget.dart';
 import 'package:aegis_vpn/settings_page/social_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SettingsRouting extends StatefulWidget {
   const SettingsRouting({super.key});
@@ -39,10 +40,8 @@ class _SettingsRoutingState extends State<SettingsRouting> {
     final w = size.width;
     final h = size.height;
 
-    // Ограничиваем максимальную ширину контента для больших экранов
     final maxContentWidth = w > 800 ? 800.0 : w * 0.96;
 
-    // Адаптивные размеры
     final pagePadding = (w * 0.03).clamp(10.0, 24.0);
     final innerPadding = (w * 0.04).clamp(10.0, 20.0);
     final blockCornerRadius = (w * 0.02).clamp(12.0, 24.0);
@@ -51,11 +50,8 @@ class _SettingsRoutingState extends State<SettingsRouting> {
     final descFontSize = (w * 0.05).clamp(13.0, 18.0);
     final headingFontSize = (w * 0.05).clamp(16.0, 22.0);
 
-    // Карточки соцсетей: высота адаптивная, но в разумных пределах
     final cardHeight = (h * 0.17).clamp(110.0, 160.0);
-
-    // Размер изображения (вверху блоки)
-    final topImageSize = (w * 0.16).clamp(56.0, 100.0);
+    final topImageSize = (w * 0.07).clamp(40.0, 80.0);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -99,7 +95,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                           SizedBox(
                             width: topImageSize,
                             height: topImageSize,
-                            child: Image.asset('assets/images/Frame 2085661621.png'),
+                            child: SvgPicture.asset('assets/icons/55.svg'),
                           ),
                           SizedBox(width: w * 0.03),
                           Expanded(
@@ -198,7 +194,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'YouTube',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/video.png',
+                                  assetImagePath: 'assets/icons/YouTube.svg',
                                   value: isChecked1,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -215,7 +211,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'Instagram',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/instagram.png',
+                                  assetImagePath: 'assets/icons/instagram.svg',
                                   value: isChecked2,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -230,7 +226,10 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                         ),
                       ),
 
-                      SizedBox(height: h * 0.02),
+                      SizedBox(
+                        height: h * 0.02,
+                      ), // или h * 0.007 для ещё меньшего отступа
+
                       SizedBox(
                         height: cardHeight,
                         child: Row(
@@ -241,7 +240,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'Facebook',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/facebook.png',
+                                  assetImagePath: 'assets/icons/Facebook.svg',
                                   value: isChecked3,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -258,7 +257,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'TikTok',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/tiktok.png',
+                                  assetImagePath: 'assets/icons/TikTok.svg',
                                   value: isChecked4,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -284,7 +283,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'X (Twitter)',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/social_x.png',
+                                  assetImagePath: 'assets/icons/social_x.svg',
                                   value: isChecked5,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -301,7 +300,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'Telegram',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/telegram.png',
+                                  assetImagePath: 'assets/icons/Telegram.svg',
                                   value: isChecked6,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -327,7 +326,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'Discord',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/discord.png',
+                                  assetImagePath: 'assets/icons/discord.svg',
                                   value: isChecked7,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -344,7 +343,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                                 child: SocialCard(
                                   title: 'ChatGPT',
                                   subtitle: 'Доступно',
-                                  assetImagePath: 'assets/images/openai.png',
+                                  assetImagePath: 'assets/icons/openai.svg',
                                   value: isChecked8,
                                   onChanged: (bool? val) {
                                     setState(() {
@@ -388,7 +387,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                           SizedBox(
                             width: topImageSize,
                             height: topImageSize,
-                            child: Image.asset('assets/images/Frame 2085661621.png'),
+                            child: SvgPicture.asset('assets/icons/55.svg'),
                           ),
                           SizedBox(width: w * 0.03),
                           Expanded(
@@ -563,7 +562,6 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:aegis_vpn/settings_page/settings_vpn.dart';
 import 'package:aegis_vpn/settings_page/tariffcard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -36,8 +37,8 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     const SizedBox(width: 20),
                     ClipOval(
-                      child: Image.asset(
-                        'assets/images/image_2025-08-09_21-50-56.png',
+                      child: SvgPicture.asset(
+                        'assets/icons/Avatar.svg',
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
@@ -57,7 +58,7 @@ class SettingsPage extends StatelessWidget {
                               child: Text(
                                 'Аккаунт',
                                 style: TextStyle(
-                                  color: Colors.white24,
+                                  color: Color(0xFF7a7a7a),
                                   fontSize: (w * 0.04).clamp(12.0, 16.0),
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -108,10 +109,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.person_sharp,
+                          SvgPicture.asset(
+                            'assets/icons/Frame2085661612.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
                             color: Colors.white,
-                            size: (w * 0.07).clamp(24.0, 40.0),
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -165,11 +167,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/word.png',
-                            width: (w * 0.07).clamp(24.0, 40.0),
-                            height: (w * 0.07).clamp(24.0, 40.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/rame2085661612.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -227,11 +229,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/like app.png',
-                            width: (w * 0.07).clamp(24.0, 40.0),
-                            height: (w * 0.07).clamp(24.0, 40.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/2085661612.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -265,11 +267,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/contat.png',
-                            width: (w * 0.07).clamp(24.0, 40.0),
-                            height: (w * 0.07).clamp(24.0, 40.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/085661612.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -303,11 +305,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/copy 1.png',
-                            width: (w * 0.06).clamp(20.0, 35.0),
-                            height: (w * 0.06).clamp(20.0, 35.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/2.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.02),
                           Expanded(
@@ -341,11 +343,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/copy 2.png',
-                            width: (w * 0.07).clamp(24.0, 40.0),
-                            height: (w * 0.07).clamp(24.0, 40.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/4.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -379,9 +381,10 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.telegram,
-                            size: (w * 0.07).clamp(24.0, 30.0),
+                          SvgPicture.asset(
+                            'assets/icons/7.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
                             color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
@@ -421,11 +424,11 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          Image.asset(
-                            'assets/images/Frame 2085661612.png',
-                            width: (w * 0.07).clamp(24.0, 40.0),
-                            height: (w * 0.07).clamp(24.0, 40.0),
-                            fit: BoxFit.contain,
+                          SvgPicture.asset(
+                            'assets/icons/9.svg',
+                            width: (w * 0.08).clamp(24.0, 40.0),
+                            height: (w * 0.08).clamp(24.0, 40.0),
+                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(

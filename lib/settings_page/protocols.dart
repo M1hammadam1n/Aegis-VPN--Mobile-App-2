@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Protocols extends StatefulWidget {
   const Protocols({super.key});
@@ -24,6 +25,7 @@ class _ProtocolsState extends State<Protocols> {
     final titleFontSize = w * 0.045 < 16 ? w * 0.045 : 16.0;
     final descFontSize = w * 0.02 < 16 ? w * 0.035 : 16.0;
     final paddingAll = w * 0.04;
+    final topImageSize = (w * 0.05).clamp(40.0, 80.0);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -46,7 +48,10 @@ class _ProtocolsState extends State<Protocols> {
       body: Center(
         child: Container(
           width: maxContentWidth,
-          padding: EdgeInsets.symmetric(horizontal: paddingAll, vertical: h * 0.02),
+          padding: EdgeInsets.symmetric(
+            horizontal: paddingAll,
+            vertical: h * 0.02,
+          ),
           child: Column(
             children: [
               Container(
@@ -60,9 +65,9 @@ class _ProtocolsState extends State<Protocols> {
                   children: [
                     // Для картинки можно ограничить ширину и высоту
                     SizedBox(
-                      width: w * 0.15 > 80 ? 80 : w * 0.15,
-                      height: w * 0.15 > 80 ? 80 : w * 0.15,
-                      child: Image.asset('assets/images/Frame 2085661621.png'),
+                      width: topImageSize,
+                      height: topImageSize,
+                      child: SvgPicture.asset('assets/icons/55.svg'),
                     ),
                     SizedBox(width: w * 0.04),
                     Expanded(

@@ -1,6 +1,7 @@
 import 'package:aegis_vpn/settings_page/protocols.dart';
 import 'package:aegis_vpn/settings_page/settings_routing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SettingsVpn extends StatelessWidget {
   const SettingsVpn({super.key});
@@ -65,9 +66,15 @@ class SettingsVpn extends StatelessWidget {
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
                                     const SettingsRouting(),
-                            transitionDuration: const Duration(milliseconds: 200),
-                            transitionsBuilder:
-                                (context, animation, secondaryAnimation, child) {
+                            transitionDuration: const Duration(
+                              milliseconds: 200,
+                            ),
+                            transitionsBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                              child,
+                            ) {
                               return FadeTransition(
                                 opacity: animation,
                                 child: child,
@@ -79,10 +86,11 @@ class SettingsVpn extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.alt_route,
-                            color: Colors.white,
-                            size: iconSizeRouting,
+                          SvgPicture.asset(
+                            'assets/icons/2222.svg',
+                            fit: BoxFit.cover,
+                            height: 45,
+                            width: 45,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -133,13 +141,15 @@ class SettingsVpn extends StatelessWidget {
                           ),
                         );
                       },
+
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.dns_outlined,
-                            size: iconSizeProtocols,
-                            color: Colors.white,
+                          SvgPicture.asset(
+                            'assets/icons/6666.svg',
+                            fit: BoxFit.cover,
+                            height: 45,
+                            width: 45,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(

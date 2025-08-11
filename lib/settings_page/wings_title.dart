@@ -8,33 +8,25 @@ class WingsTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final screenWidth = size.width;
+    final screenHeight = size.height;
 
-    // Определяем тип экрана
-    final isSmall = screenWidth < 360;
-    final isMedium = screenWidth >= 360 && screenWidth < 600;
-    final isLarge = screenWidth >= 600;
+    // Базовые размеры под эталонный макет (например, 360x800)
+    const baseWidth = 360.0;
+    const baseHeight = 800.0;
 
-    // Высота контейнера
-    final containerHeight =
-        isSmall
-            ? min(size.height * 0.18, 200.0)
-            : isMedium
-            ? min(size.height * 0.22, 240.0)
-            : min(size.height * 0.26, 280.0);
+    // Коэффициенты масштабирования (минимум 0.85 чтобы не схлопывалось)
+    final scaleW = max(0.85, screenWidth / baseWidth);
+    final scaleH = max(0.85, screenHeight / baseHeight);
 
-    // Размер шрифтов
-    final titleFontSize =
-        isSmall
-            ? 20.0
-            : isMedium
-            ? 28.0
-            : 42.0;
-    final subtitleFontSize =
-        isSmall
-            ? 12.0
-            : isMedium
-            ? 14.0
-            : 18.0;
+    // Размер контейнера (по высоте)
+    final containerHeight = min(
+      screenHeight * (0.22 * scaleH), // базовая пропорция
+      280.0 * scaleH, // ограничение сверху
+    );
+
+    // Шрифты (масштабируем относительно ширины)
+    final titleFontSize = 28.0 * scaleW;
+    final subtitleFontSize = 14.0 * scaleW;
 
     return SizedBox(
       width: double.infinity,
@@ -46,9 +38,9 @@ class WingsTitle extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: SizedBox(
-                height: containerHeight * (isSmall ? 0.9 : 0.95),
+                height: containerHeight * 0.95,
                 child: Image.asset(
-                  'assets/images/Frame 2085661625.png', // без пробелов
+                  'assets/images/Frame 2085661625.png',
                   fit: BoxFit.contain,
                   alignment: Alignment.center,
                 ),
@@ -65,8 +57,8 @@ class WingsTitle extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    isSmall
-                        ? 'Открой\nпреимущества' // короче на маленьких
+                    screenWidth < 340
+                        ? 'Открой\nпреимущества'
                         : 'Открой для себя\nвсе преимущества',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -80,7 +72,7 @@ class WingsTitle extends StatelessWidget {
                   SizedBox(height: screenWidth * 0.02),
 
                   Text(
-                    isSmall
+                    screenWidth < 340
                         ? 'Попробуйте подписку и забудьте о медленном интернете.'
                         : 'Попробуйте подписку и забудьте о медленной \nскорости интернета. Смотрите 4К контент,\nиграйте в игры и наслаждайтесь YouTube.\nПродлится автоматически.',
                     textAlign: TextAlign.center,
@@ -90,14 +82,11 @@ class WingsTitle extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       height: 1.2,
                     ),
-                    // maxLines: isSmall ? 2 : 3,
-                    // overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
           ),
-          // SizedBox(height: ,)
         ],
       ),
     );

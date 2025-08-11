@@ -1,6 +1,7 @@
 import 'package:aegis_vpn/settings_page/payment_error_page.dart';
 import 'package:aegis_vpn/settings_page/tariffcard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'payment_success_page.dart';
 
 class TariffPurchasePage extends StatefulWidget {
@@ -11,6 +12,7 @@ class TariffPurchasePage extends StatefulWidget {
   @override
   State<TariffPurchasePage> createState() => _TariffPurchasePageState();
 }
+
 class _TariffPurchasePageState extends State<TariffPurchasePage> {
   final TextEditingController _emailController = TextEditingController();
 
@@ -24,205 +26,242 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
 
   // Вставь сюда, заменяя/дополняя свой существующий метод _onPayPressed
   Future<void> _onPayPressed() async {
-  final email = _emailController.text.trim();
+    final email = _emailController.text.trim();
 
-  if (email.isNotEmpty && _emailRegExp.hasMatch(email)) {
-    SubscriptionManager().activeTariff = TariffData(
-      duration: widget.tariff['duration']!,
-      subtitle: widget.tariff['subtitle']!,
-      price: widget.tariff['price']!,
-    );
+    if (email.isNotEmpty && _emailRegExp.hasMatch(email)) {
+      SubscriptionManager().activeTariff = TariffData(
+        duration: widget.tariff['duration']!,
+        subtitle: widget.tariff['subtitle']!,
+        price: widget.tariff['price']!,
+      );
 
-    await Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(builder: (_) => const PaymentSuccessPage()),
-    );
+      await Navigator.of(
+        context,
+        rootNavigator: true,
+      ).push(MaterialPageRoute(builder: (_) => const PaymentSuccessPage()));
 
-    _emailController.clear();
-
-  } else {
-    await Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(builder: (_) => const PaymentErrorPage()),
-    );
+      _emailController.clear();
+    } else {
+      await Navigator.of(
+        context,
+        rootNavigator: true,
+      ).push(MaterialPageRoute(builder: (_) => const PaymentErrorPage()));
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
-        final size = MediaQuery.of(context).size;
-    final w = size.width;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final w = constraints.maxWidth;
+        final h = constraints.maxHeight;
+        final textScale = MediaQuery.of(context).textScaleFactor;
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text(
-          'Покупка тарифа',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-          ),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Электронная почта',
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              cursorColor: Colors.white,
-              decoration: InputDecoration(
-                hintText: 'Адрес эл. почты, куда придёт чек',
-                hintStyle: const TextStyle(color: Colors.white38),
-                filled: true,
-                fillColor: Colors.white10,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              style: const TextStyle(color: Colors.white),
-            ),
+        // Используем минимальное значение для баланса
+        final shortestSide = w < h ? w : h;
 
-            const SizedBox(height: 18),
-            const Text(
-              'Способ оплаты',
+        final titleFont = (shortestSide * 0.07).clamp(16.0, 24.0) * textScale;
+        final subtitleFont =
+            (shortestSide * 0.045).clamp(12.0, 16.0) * textScale;
+        final buttonFont = (shortestSide * 0.05).clamp(14.0, 18.0) * textScale;
+        final totalFont = (shortestSide * 0.05).clamp(14.0, 18.0) * textScale;
+
+        final padding = (w * 0.03).clamp(8.0, 20.0);
+        final imageSize = (h * 0.06).clamp(32.0, 50.0);
+        final iconSize = (h * 0.05).clamp(24.0, 40.0);
+        final buttonHeight = (h * 0.07).clamp(40.0, 60.0);
+
+        return Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_sharp, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            backgroundColor: Colors.black,
+            centerTitle: true,
+            title: Text(
+              'Покупка тарифа',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
+                fontSize: titleFont,
               ),
             ),
-            const SizedBox(height: 10),
-
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFF191919),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/images/Badge Flags.png',
-                    height: 50,
-                    width: 50,
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'ЮMoney',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        'МИР, Visa, MasterCard',
-                        style: TextStyle(color: Colors.white30, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            const Spacer(),
-
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFF191919),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF3c3c3c),
-                      borderRadius: BorderRadius.circular(16),
+          ),
+          body: Padding(
+            padding: EdgeInsets.all(padding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Электронная почта',
+                  style: TextStyle(color: Colors.white, fontSize: subtitleFont),
+                ),
+                SizedBox(height: h * 0.015),
+                TextField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    hintText: 'Адрес эл. почты, куда придёт чек',
+                    hintStyle: TextStyle(
+                      color: Colors.white38,
+                      fontSize: subtitleFont * 0.9,
                     ),
-                    child: Center(
-                      child: Image.asset(
-                        'assets/images/Badge Flags 2.png',
-                        height: 40,
-                        width: 40,
-                      ),
+                    filled: true,
+                    fillColor: Colors.white10,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: padding,
+                      vertical: (h * 0.016).clamp(8.0, 14.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      borderSide: BorderSide.none,
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  style: TextStyle(color: Colors.white, fontSize: subtitleFont),
+                ),
+
+                SizedBox(height: h * 0.025),
+                Text(
+                  'Способ оплаты',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: totalFont,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: h * 0.012),
+
+                Container(
+                  padding: EdgeInsets.all(padding),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF191919),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
                     children: [
-                      Text(
-                        'Итого: ${widget.tariff['price']!.replaceAll(' в месяц', '')}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
+                      Image.asset(
+                        'assets/images/Badge Flags.png',
+                        height: imageSize,
+                        width: imageSize,
+                      ),
+                      SizedBox(width: w * 0.03),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'ЮMoney',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: totalFont,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: h * 0.005),
+                          Text(
+                            'МИР, Visa, MasterCard',
+                            style: TextStyle(
+                              color: Colors.white30,
+                              fontSize: subtitleFont,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Spacer(),
+
+                Container(
+                  padding: EdgeInsets.all(padding),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF191919),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: (h * 0.07).clamp(36.0, 56.0),
+                        height: (h * 0.07).clamp(36.0, 56.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF3c3c3c),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+
+                        child: Center(
+                          child: SvgPicture.asset(
+                            'assets/icons/9.svg',
+                            height: iconSize,
+                            width: iconSize,
+                          ),
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '${widget.tariff['subtitle']}, ${widget.tariff['duration']}',
-                        style: const TextStyle(
-                          color: Colors.white38,
-                          fontSize: 15,
+                      SizedBox(width: w * 0.03),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Итого: ${widget.tariff['price']!.replaceAll(' в месяц', '')}',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: totalFont,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: h * 0.005),
+                            Text(
+                              '${widget.tariff['subtitle']}, ${widget.tariff['duration']}',
+                              style: TextStyle(
+                                color: Colors.white38,
+                                fontSize: subtitleFont,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ),
 
-            const SizedBox(height: 14),
+                SizedBox(height: h * 0.018),
 
-            // Кнопка оплатить — валидируем email
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: _onPayPressed,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                SizedBox(
+                  width: double.infinity,
+                  height: buttonHeight,
+                  child: ElevatedButton(
+                    onPressed: _onPayPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'Оплатить',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: buttonFont,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-                child: const Text(
-                  'Оплатить',
-                  style: TextStyle(color: Colors.black, fontSize: 20),
-                ),
-              ),
+                SizedBox(height: h * 0.050),
+              ],
             ),
-
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -55,9 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
           // Логотип в центре
           Center(
             child: Image.asset(
-              'assets/images/aegisvpn_new_page-0003 1.png',
-              fit: BoxFit.contain,
-              width: MediaQuery.of(context).size.width * 0.6,
+              'assets/images/aegisvpn_new_page-0003.png',
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width * 0.8,
             ),
           ),
 

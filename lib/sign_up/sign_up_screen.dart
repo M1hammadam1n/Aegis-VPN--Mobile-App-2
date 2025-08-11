@@ -7,23 +7,31 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final bool isSmallScreen = size.height < 700;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Верхняя картинка без изменений
+            // Верхняя картинка
             Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Image.asset('assets/images/singin.jpg', fit: BoxFit.cover),
+              padding: EdgeInsets.only(top: isSmallScreen ? 10 : 20),
+              child: Image.asset(
+                'assets/images/singin.jpg',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: isSmallScreen ? size.height * 0.25 : null,
+              ),
             ),
 
             // Основной блок с фоном и содержимым
             Expanded(
               child: Stack(
                 children: [
-                  // Фон: картинка + градиент, покрывающий область текста и кнопок
+                  // Фон
                   Positioned.fill(
                     child: Stack(
                       fit: StackFit.expand,
@@ -37,17 +45,13 @@ class SignUpScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.black.withOpacity(
-                                  0.7,
-                                ), // сверху затемнение
+                                Colors.black.withOpacity(0.7),
                                 Colors.transparent,
-                                Colors.black.withOpacity(
-                                  0.6,
-                                ), // снизу затемнение
+                                Colors.black.withOpacity(0.6),
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              stops: [0.0, 0.5, 1.0],
+                              stops: const [0.0, 0.5, 1.0],
                             ),
                           ),
                         ),
@@ -55,169 +59,140 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Содержимое поверх фона: тексты и кнопки
+                  // Содержимое
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                    ), // чуть больше отступы
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isSmallScreen ? 20 : 30,
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Spacer(flex: 2),
-                        const Text(
+                        Text(
                           'Регистрация',
                           style: TextStyle(
-                            fontSize: 42, // увеличен шрифт
+                            fontSize: isSmallScreen ? 34 : 42,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600, // чуть жирнее
+                            fontWeight: FontWeight.w600,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 10), // больше отступ
-                        const Text(
+                        SizedBox(height: isSmallScreen ? 8 : 12),
+                        Text(
                           'Создайте аккаунт любым удобным \nдля вас методом, доступным ниже.',
                           style: TextStyle(
-                            fontSize: 18, // увеличен шрифт
-                            color: Colors.white70, // чуть светлее и контрастней
+                            fontSize: isSmallScreen ? 16 : 18,
+                            color: Colors.white70,
+                            height: 1.4,
                           ),
                           textAlign: TextAlign.center,
                         ),
                         const Spacer(flex: 3),
 
-                        // Кнопка E-Mail с большей высотой и padding
-                        SizedBox(
-                          width:
-                              double
-                                  .infinity, // растянуть на всю ширину Padding (экран минус отступы)
-                          height: 65,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SingUpEmail(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              overlayColor: Colors.black,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.email,
-                                  color: Colors.black,
-                                  size: 28,
-                                ),
-                                SizedBox(width: 12),
-                                Text(
-                                  'Продолжить с E-Mail',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        // Кнопка E-Mail
+                        _buildAuthButton(
+                          context: context,
+                          iconWidget: SvgPicture.asset(
+                            'assets/icons/66666.svg',
+                            width: 24,
+                            height: 24,
                           ),
+                          text: 'Продолжить с E-Mail',
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SingUpEmail(),
+                              ),
+                            );
+                          },
+                          isPrimary: true,
                         ),
 
-                        const SizedBox(height: 16),
+                        SizedBox(height: isSmallScreen ? 12 : 16),
 
-                        // Кнопки Apple и Google — делим ширину поровну, с отступом между ними
+                        // Кнопки Apple и Google
                         Row(
                           children: [
                             Expanded(
-                              child: SizedBox(
-                                height: 65,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF191919),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 18,
-                                    ),
-                                    overlayColor: Colors.black,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Icon(
-                                        Icons.apple,
-                                        color: Colors.white,
-                                        size: 30,
-                                      ),
-                                      SizedBox(width: 12),
-                                      Text(
-                                        'Apple',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              child: _buildAuthButton(
+                                context: context,
+                                iconWidget: SvgPicture.asset(
+                                  'assets/icons/AppleOriginal.svg',
+                                  width: 24,
+                                  height: 24,
                                 ),
+                                text: 'Apple',
+                                onPressed: () {},
                               ),
                             ),
-                            const SizedBox(width: 12), // отступ между кнопками
+                            SizedBox(width: isSmallScreen ? 8 : 12),
                             Expanded(
-                              child: SizedBox(
-                                height: 65,
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFF191919),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 18,
-                                    ),
-                                    overlayColor: Colors.black,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        'assets/icons/google.svg',
-                                        width: 30,
-                                        height: 30,
-                                      ),
-                                      const SizedBox(width: 12),
-                                      const Text(
-                                        'Google',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              child: _buildAuthButton(
+                                context: context,
+                                iconWidget: SvgPicture.asset(
+                                  'assets/icons/google.svg',
+                                  width: 24,
+                                  height: 24,
                                 ),
+                                text: 'Google',
+                                onPressed: () {},
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 24), // увеличенный отступ внизу
+                        SizedBox(height: isSmallScreen ? 16 : 24),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAuthButton({
+    required BuildContext context,
+    required Widget iconWidget,
+    required String text,
+    required VoidCallback onPressed,
+    bool isPrimary = false,
+  }) {
+    final size = MediaQuery.of(context).size;
+    final bool isSmallScreen = size.height < 700;
+
+    return SizedBox(
+      height: isSmallScreen ? 56 : 65,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: isPrimary ? Colors.white : const Color(0xFF191919),
+          foregroundColor: isPrimary ? Colors.black : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          padding: EdgeInsets.zero,
+          splashFactory: NoSplash.splashFactory,
+          elevation: 0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: isSmallScreen ? 24 : 28,
+              height: isSmallScreen ? 24 : 28,
+              child: iconWidget,
+            ),
+            SizedBox(width: isSmallScreen ? 8 : 12),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: isSmallScreen ? 18 : (isPrimary ? 22 : 18),
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],

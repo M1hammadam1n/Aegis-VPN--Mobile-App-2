@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ServersPage extends StatelessWidget {
   const ServersPage({super.key});
-
   static final List<ServerData> freeServers = [
     ServerData(
-      flagAsset: 'assets/images/usa icon .png',
+      flagAsset: 'assets/images/theUnitedStates1.png',
       country: 'Америка',
       city: 'Нью-Йорк',
       level: 4,
@@ -14,7 +13,7 @@ class ServersPage extends StatelessWidget {
       crownAsset: '',
     ),
     ServerData(
-      flagAsset: 'assets/images/farnceFlags.png',
+      flagAsset: 'assets/images/France1.png',
       country: 'Франция',
       city: 'Париж',
       level: 2,
@@ -25,28 +24,28 @@ class ServersPage extends StatelessWidget {
 
   static final List<ServerData> recommendedServers = [
     ServerData(
-      flagAsset: 'assets/images/3  Flags.png',
+      flagAsset: 'assets/images/CzechRepublic1.png',
       country: 'Чехия',
       city: 'Прага',
       level: 4,
       showCrown: true,
-      crownAsset: 'assets/images/king.png',
+      crownAsset: 'assets/icons/king.svg',
     ),
     ServerData(
-      flagAsset: 'assets/images/4 Flags.png',
+      flagAsset: 'assets/images/Canada1.png',
       country: 'Индонезия',
       city: 'Джакарта',
       level: 4,
       showCrown: true,
-      crownAsset: 'assets/images/king.png',
+      crownAsset: 'assets/icons/king.svg',
     ),
     ServerData(
-      flagAsset: 'assets/images/5 Flags.png',
+      flagAsset: 'assets/images/Indonesia1.png',
       country: 'Сервер 4',
       city: 'Город 4',
       level: 3,
       showCrown: true,
-      crownAsset: 'assets/images/king.png',
+      crownAsset: 'assets/icons/king.svg',
     ),
   ];
 
@@ -71,7 +70,10 @@ class ServersPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Text('Сервера', style: TextStyle(color: Colors.white, fontSize: fontSize(18))),
+        title: Text(
+          'Сервера',
+          style: TextStyle(color: Colors.white, fontSize: fontSize(18)),
+        ),
         backgroundColor: Colors.black,
       ),
       body: SafeArea(
@@ -129,7 +131,12 @@ class ServersPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(adaptWidth(16)),
                     ),
                     child: Center(
-                      child: Image.asset('assets/images/word.png', width: adaptWidth(30), height: adaptWidth(30)),
+                      child: SvgPicture.asset(
+                        'assets/icons/rame2085661612.svg',
+                        width: (w * 0.08).clamp(24.0, 40.0),
+                        height: (w * 0.08).clamp(24.0, 40.0),
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   SizedBox(width: adaptWidth(12)),
@@ -310,7 +317,13 @@ class ServerTile extends StatelessWidget {
               color: const Color(0xFF333333),
               borderRadius: BorderRadius.circular(adaptWidth(16)),
             ),
-            child: Center(child: Image.asset(flagAsset, width: adaptWidth(25), height: adaptWidth(25))),
+            child: Center(
+              child: Image.asset(
+                flagAsset,
+                width: adaptWidth(32),
+                height: adaptWidth(32),
+              ),
+            ),
           ),
           SizedBox(width: adaptWidth(12)),
           Column(
@@ -339,9 +352,17 @@ class ServerTile extends StatelessWidget {
           if (showCrown)
             Padding(
               padding: EdgeInsets.only(right: adaptWidth(8)),
-              child: Image.asset(crownAsset, width: adaptWidth(20), height: adaptWidth(20)),
+              child: SvgPicture.asset(
+                crownAsset,
+                width: adaptWidth(20),
+                height: adaptWidth(20),
+              ),
             ),
-          NetworkSignalIndicator(level: level, adaptWidthFunction: adaptWidth, adaptHeightFunction: adaptHeight),
+          NetworkSignalIndicator(
+            level: level,
+            adaptWidthFunction: adaptWidth,
+            adaptHeightFunction: adaptHeight,
+          ),
           SizedBox(width: adaptWidth(12)),
           ElevatedButton(
             onPressed: () {},

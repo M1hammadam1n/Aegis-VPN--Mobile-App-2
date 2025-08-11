@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 enum ConnectionStateStatus {
   disconnected, // дефолт: Подключиться, белая кнопка
@@ -83,8 +84,8 @@ class _GeneralScreensState extends State<GeneralScreens> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: w * 0.05,
-            vertical: h * 0.01,
+            horizontal: w * 0.00,
+            vertical: h * 0.004,
           ),
           child: Column(
             children: [
@@ -105,14 +106,14 @@ class _GeneralScreensState extends State<GeneralScreens> {
                       height: double.infinity,
                     ),
                     Positioned(
-                      bottom: h * 0.14,
-                      child: Image.asset(
+                      bottom: h * 0.13,
+                      child: SvgPicture.asset(
                         isConnected
-                            ? 'assets/images/Icon Frame on.png'
-                            : 'assets/images/Icon Frame.png',
+                            ? 'assets/icons/555555555.svg'
+                            : 'assets/icons/11IconFrame.svg',
                         fit: BoxFit.cover,
                         width: w * 0.1,
-                        height: h * 0.05,
+                        height: h * 0.07,
                       ),
                     ),
                     Positioned(
@@ -180,7 +181,7 @@ class _GeneralScreensState extends State<GeneralScreens> {
                         isConnected
                             ? 'assets/images/aegisvpn_new_page-0006 3.png'
                             : 'assets/images/aegisvpn_new_page-0006 4.png',
-                        fit: BoxFit.cover,
+                        fit: BoxFit.none,
                         width: w,
                         height: double.infinity,
                       ),
@@ -202,7 +203,7 @@ class _GeneralScreensState extends State<GeneralScreens> {
                   ),
                   child: Row(
                     children: [
-                      Image.asset('assets/images/Frame 2085661600.png'),
+                      SvgPicture.asset('assets/icons/52085661600.svg'),
                       SizedBox(width: w * 0.04),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,9 +231,8 @@ class _GeneralScreensState extends State<GeneralScreens> {
                 ),
               ),
 
-              SizedBox(height: h * 0.015),
+              SizedBox(height: h * 0.012),
 
-              // Нижний блок с выбором региона и кнопкой подключения
               Flexible(
                 flex: 2,
                 child: Container(
@@ -247,7 +247,21 @@ class _GeneralScreensState extends State<GeneralScreens> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset('assets/images/usa icon .png'),
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF333333),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Center(
+                                child: Image.asset(
+                                  'assets/images/theUnitedStates1.png',
+                                  width: (w * 0.06).clamp(24.0, 40.0),
+                                  height: (w * 0.06).clamp(24.0, 40.0),
+                                ),
+                              ),
+                            ),
 
                             SizedBox(width: w * 0.04),
 
@@ -301,10 +315,10 @@ class _GeneralScreensState extends State<GeneralScreens> {
                                 backgroundColor: const Color(0xFF272727),
                                 elevation: 0,
                               ).copyWith(
-                                overlayColor: MaterialStateProperty.resolveWith<
+                                overlayColor: WidgetStateProperty.resolveWith<
                                   Color?
-                                >((Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.pressed)) {
+                                >((Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.pressed)) {
                                     return const Color(0xFF272727);
                                   }
                                   return null;
@@ -339,34 +353,52 @@ class _GeneralScreensState extends State<GeneralScreens> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            minimumSize: Size(double.infinity, h * 0.06),
                           ),
                           icon:
                               isConnecting
                                   ? SizedBox(
-                                    width: w * 0.06,
-                                    height: w * 0.06,
-                                    child: Image.asset('assets/images/3.png'),
+                                    width: w * 0.04,
+                                    height: w * 0.04,
+                                    child: SvgPicture.asset(
+                                      'assets/icons/222222.svg',
+                                    ),
                                   )
                                   : isConnected
-                                  ? Image.asset('assets/images/2.png')
-                                  : Image.asset('assets/images/1.png'),
-                          label: Text(
-                            isDisconnected
-                                ? 'Подключиться'
-                                : isConnecting
-                                ? 'Подключение'
-                                : 'Отключиться',
-                            style: TextStyle(
-                              color:
-                                  isConnecting
-                                      ? Colors.grey
-                                      : isConnected
-                                      ? Colors.grey
-                                      : Colors.black,
-                              fontSize: w * 0.05,
+                                  ? SizedBox(
+                                    width: w * 0.04,
+                                    height: w * 0.04,
+                                    child: SvgPicture.asset(
+                                      'assets/icons/3333.svg',
+                                    ),
+                                  )
+                                  : SizedBox(
+                                    width: w * 0.04,
+                                    height: w * 0.04,
+                                    child: SvgPicture.asset(
+                                      'assets/icons/11111.svg',
+                                    ),
+                                  ),
+                          label: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              isDisconnected
+                                  ? 'Подключиться'
+                                  : isConnecting
+                                  ? 'Подключение'
+                                  : 'Отключиться',
+                              style: TextStyle(
+                                color:
+                                    isConnecting
+                                        ? Colors.grey
+                                        : isConnected
+                                        ? Colors.grey
+                                        : Colors.black,
+                                fontSize: w * 0.04, // уменьшили
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
