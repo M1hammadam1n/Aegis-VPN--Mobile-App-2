@@ -79,7 +79,6 @@ class _SettingsRoutingState extends State<SettingsRouting> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              // Блок 1
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF191919),
@@ -152,8 +151,6 @@ class _SettingsRoutingState extends State<SettingsRouting> {
               ),
 
               SizedBox(height: h * 0.02),
-
-              // Блок "Приложения"
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF191919),
@@ -181,9 +178,9 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+
                       SizedBox(height: h * 0.02),
 
-                      // Ряды карточек — высота адаптивна
                       SizedBox(
                         height: cardHeight,
                         child: Row(
@@ -226,9 +223,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                         ),
                       ),
 
-                      SizedBox(
-                        height: h * 0.02,
-                      ), // или h * 0.007 для ещё меньшего отступа
+                      SizedBox(height: h * 0.02),
 
                       SizedBox(
                         height: cardHeight,
@@ -273,6 +268,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                       ),
 
                       SizedBox(height: h * 0.02),
+
                       SizedBox(
                         height: cardHeight,
                         child: Row(
@@ -316,6 +312,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                       ),
 
                       SizedBox(height: h * 0.02),
+
                       SizedBox(
                         height: cardHeight,
                         child: Row(
@@ -366,12 +363,10 @@ class _SettingsRoutingState extends State<SettingsRouting> {
 
               SizedBox(height: h * 0.02),
 
-              // SitesWidget (оставляем как есть, он сам отвечает за свою адаптацию)
               SitesWidget(),
 
               SizedBox(height: h * 0.02),
 
-              // Блок 2 (домены и переключатель)
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF191919),
@@ -403,9 +398,11 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                           ),
                         ],
                       ),
+
                       SizedBox(height: h * 0.015),
                       const Divider(thickness: 0.8, color: Colors.white12),
                       SizedBox(height: h * 0.01),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -445,7 +442,6 @@ class _SettingsRoutingState extends State<SettingsRouting> {
 
               SizedBox(height: h * 0.02),
 
-              // Блок Домены
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFF191919),
@@ -464,6 +460,7 @@ class _SettingsRoutingState extends State<SettingsRouting> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
+
                       SizedBox(height: h * 0.01),
                       const Divider(thickness: 0.8, color: Colors.white12),
                       SizedBox(height: h * 0.01),

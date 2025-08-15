@@ -17,11 +17,7 @@ class _ProtocolsState extends State<Protocols> {
     final size = MediaQuery.of(context).size;
     final w = size.width;
     final h = size.height;
-
-    // Ограничиваем максимальную ширину контейнера для больших экранов
     final maxContentWidth = w > 600 ? 600.0 : w * 0.95;
-
-    // Размер шрифта и отступы масштабируем под ширину экрана
     final titleFontSize = w * 0.045 < 16 ? w * 0.045 : 16.0;
     final descFontSize = w * 0.02 < 16 ? w * 0.035 : 16.0;
     final paddingAll = w * 0.04;
@@ -63,7 +59,6 @@ class _ProtocolsState extends State<Protocols> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Для картинки можно ограничить ширину и высоту
                     SizedBox(
                       width: topImageSize,
                       height: topImageSize,
@@ -102,9 +97,13 @@ class _ProtocolsState extends State<Protocols> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
+
                     SizedBox(height: h * 0.015),
+
                     const Divider(thickness: 0.8, color: Colors.white12),
+
                     SizedBox(height: h * 0.015),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -145,9 +144,13 @@ class _ProtocolsState extends State<Protocols> {
                         ),
                       ],
                     ),
+
                     SizedBox(height: h * 0.015),
+
                     const Divider(thickness: 0.8, color: Colors.white12),
+
                     SizedBox(height: h * 0.015),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

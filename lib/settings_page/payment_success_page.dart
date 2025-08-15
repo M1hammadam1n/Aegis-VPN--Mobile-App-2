@@ -16,10 +16,8 @@ class PaymentSuccessPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Пустое место сверху
               const SizedBox(height: 1),
 
-              // Центр — картинка и тексты
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -47,7 +45,6 @@ class PaymentSuccessPage extends StatelessWidget {
                 ],
               ),
 
-              // Кнопка внизу
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: SizedBox(

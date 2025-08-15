@@ -24,8 +24,6 @@ class SocialCard extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final isSmallScreen = screenWidth < 350;
-
-    // Максимальная высота карточки — примерно 25% высоты экрана, но минимум 120
     final maxCardHeight =
         screenHeight * 0.20 < 120 ? 120.0 : screenHeight * 0.25;
 
@@ -45,7 +43,6 @@ class SocialCard extends StatelessWidget {
         padding: EdgeInsets.all(isSmallScreen ? 10.0 : 12.0),
         child: Stack(
           children: [
-            // Основной контент слева сверху
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -58,7 +55,9 @@ class SocialCard extends StatelessWidget {
                     child: SvgPicture.asset(assetImagePath),
                   ),
                 ),
+
                 SizedBox(height: isSmallScreen ? 6 : 8),
+
                 Flexible(
                   child: Text(
                     title,
@@ -88,7 +87,6 @@ class SocialCard extends StatelessWidget {
               ],
             ),
 
-            // Checkbox справа внизу
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

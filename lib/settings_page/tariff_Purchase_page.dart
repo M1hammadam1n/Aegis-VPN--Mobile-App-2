@@ -24,7 +24,6 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
     super.dispose();
   }
 
-  // Вставь сюда, заменяя/дополняя свой существующий метод _onPayPressed
   Future<void> _onPayPressed() async {
     final email = _emailController.text.trim();
 
@@ -56,16 +55,12 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
         final w = constraints.maxWidth;
         final h = constraints.maxHeight;
         final textScale = MediaQuery.of(context).textScaleFactor;
-
-        // Используем минимальное значение для баланса
         final shortestSide = w < h ? w : h;
-
         final titleFont = (shortestSide * 0.07).clamp(16.0, 24.0) * textScale;
         final subtitleFont =
             (shortestSide * 0.045).clamp(12.0, 16.0) * textScale;
         final buttonFont = (shortestSide * 0.05).clamp(14.0, 18.0) * textScale;
         final totalFont = (shortestSide * 0.05).clamp(14.0, 18.0) * textScale;
-
         final padding = (w * 0.03).clamp(8.0, 20.0);
         final imageSize = (h * 0.06).clamp(32.0, 50.0);
         final iconSize = (h * 0.05).clamp(24.0, 40.0);
@@ -98,7 +93,9 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
                   'Электронная почта',
                   style: TextStyle(color: Colors.white, fontSize: subtitleFont),
                 ),
+
                 SizedBox(height: h * 0.015),
+
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -124,6 +121,7 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
                 ),
 
                 SizedBox(height: h * 0.025),
+
                 Text(
                   'Способ оплаты',
                   style: TextStyle(
@@ -199,7 +197,9 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
                           ),
                         ),
                       ),
+
                       SizedBox(width: w * 0.03),
+
                       Flexible(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,7 +216,9 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
                                 ),
                               ),
                             ),
+
                             SizedBox(height: h * 0.005),
+
                             Text(
                               '${widget.tariff['subtitle']}, ${widget.tariff['duration']}',
                               style: TextStyle(
@@ -256,6 +258,7 @@ class _TariffPurchasePageState extends State<TariffPurchasePage> {
                     ),
                   ),
                 ),
+
                 SizedBox(height: h * 0.050),
               ],
             ),

@@ -1,13 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-enum ConnectionStateStatus {
-  disconnected, // дефолт: Подключиться, белая кнопка
-  connecting, // промежуточное: Подключается + индикатор, серая кнопка, кнопка неактивна
-  connected, // подключено: Отключиться, темная кнопка
-}
+enum ConnectionStateStatus { disconnected, connecting, connected }
 
 class GeneralScreens extends StatefulWidget {
   const GeneralScreens({super.key});
@@ -18,8 +13,8 @@ class GeneralScreens extends StatefulWidget {
 
 class _GeneralScreensState extends State<GeneralScreens> {
   ConnectionStateStatus connectionState = ConnectionStateStatus.disconnected;
-  Timer? _timer; // для секундомера
-  Timer? _connectTimer; // для задержки "Подключается"
+  Timer? _timer;
+  Timer? _connectTimer;
   int secondsElapsed = 0;
 
   void _toggleConnection() {
@@ -28,7 +23,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
         connectionState = ConnectionStateStatus.connecting;
       });
 
-      // Через 2 секунды считаем, что подключились
       _connectTimer?.cancel();
       _connectTimer = Timer(const Duration(seconds: 2), () {
         setState(() {
@@ -44,7 +38,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
         });
       });
     } else if (connectionState == ConnectionStateStatus.connected) {
-      // Отключаемся сразу
       _connectTimer?.cancel();
       _timer?.cancel();
       setState(() {
@@ -52,7 +45,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
         secondsElapsed = 0;
       });
     }
-    // Если состояние connecting — кнопка неактивна, нажатия не будет
   }
 
   String _formatTime(int seconds) {
@@ -91,7 +83,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
             children: [
               SizedBox(height: h * 0.01),
 
-              // Верхняя часть с фото и временем
               Flexible(
                 flex: 3,
                 child: Stack(
@@ -163,7 +154,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
 
               SizedBox(height: h * 0.015),
 
-              // Карта
               Flexible(
                 flex: 3,
                 child: Stack(
@@ -192,7 +182,6 @@ class _GeneralScreensState extends State<GeneralScreens> {
 
               SizedBox(height: h * 0.015),
 
-              // Блок трафика
               Flexible(
                 flex: 1,
                 child: Container(
@@ -262,10 +251,7 @@ class _GeneralScreensState extends State<GeneralScreens> {
                                 ),
                               ),
                             ),
-
                             SizedBox(width: w * 0.04),
-
-                            // Точка состояния
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -395,7 +381,7 @@ class _GeneralScreensState extends State<GeneralScreens> {
                                         : isConnected
                                         ? Colors.grey
                                         : Colors.black,
-                                fontSize: w * 0.04, // уменьшили
+                                fontSize: w * 0.04,
                               ),
                               textAlign: TextAlign.center,
                             ),

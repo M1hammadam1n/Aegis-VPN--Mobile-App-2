@@ -9,22 +9,12 @@ class WingsTitle extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final screenWidth = size.width;
     final screenHeight = size.height;
-
-    // Базовые размеры под эталонный макет (например, 360x800)
     const baseWidth = 360.0;
     const baseHeight = 800.0;
-
-    // Коэффициенты масштабирования (минимум 0.85 чтобы не схлопывалось)
     final scaleW = max(0.85, screenWidth / baseWidth);
     final scaleH = max(0.85, screenHeight / baseHeight);
+    final containerHeight = min(screenHeight * (0.22 * scaleH), 280.0 * scaleH);
 
-    // Размер контейнера (по высоте)
-    final containerHeight = min(
-      screenHeight * (0.22 * scaleH), // базовая пропорция
-      280.0 * scaleH, // ограничение сверху
-    );
-
-    // Шрифты (масштабируем относительно ширины)
     final titleFontSize = 28.0 * scaleW;
     final subtitleFontSize = 14.0 * scaleW;
 
@@ -34,7 +24,6 @@ class WingsTitle extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Фон
           Positioned.fill(
             child: Center(
               child: SizedBox(
@@ -48,7 +37,6 @@ class WingsTitle extends StatelessWidget {
             ),
           ),
 
-          // Текст
           Padding(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
             child: ConstrainedBox(

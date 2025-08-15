@@ -7,10 +7,8 @@ class SingInEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final double screenHeight = size.height;
-    final double screenWidth = size.width;
     final bool isSmallScreen = size.height < 600;
 
-    // Масштабирование шрифтов и отступов
     double scale(double value) => value * (screenHeight / 800);
 
     return Scaffold(
@@ -21,11 +19,11 @@ class SingInEmail extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // === Верхний блок ===
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: scale(50)), // отступ сверху
+                  SizedBox(height: scale(50)),
+
                   Text(
                     'Вход с E-Mail',
                     style: TextStyle(
@@ -34,7 +32,9 @@ class SingInEmail extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+
                   SizedBox(height: scale(8)),
+
                   Text(
                     'Введите адрес электронной почты.\nМы отправим вам код верификации.',
                     textAlign: TextAlign.start,
@@ -47,7 +47,6 @@ class SingInEmail extends StatelessWidget {
                 ],
               ),
 
-              // === Средний блок ===
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,7 +61,9 @@ class SingInEmail extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+
                   SizedBox(height: scale(10)),
+
                   TextField(
                     obscureText: false,
                     cursorColor: Colors.white,
@@ -89,8 +90,9 @@ class SingInEmail extends StatelessWidget {
                   ),
                 ],
               ),
+
               const Spacer(),
-              // === Нижний блок (кнопки) ===
+
               Column(
                 children: [
                   SizedBox(
@@ -137,27 +139,6 @@ class SingInEmail extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   width: double.infinity,
-                  //   height: scale(55).clamp(45, 60),
-                  //   child: OutlinedButton(
-                  //     onPressed: () {
-                  //       Navigator.pop(context);
-                  //     },
-                  //     style: OutlinedButton.styleFrom(
-                  //       side: BorderSide.none,
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(scale(20)),
-                  //       ),
-                  //       padding: EdgeInsets.symmetric(vertical: scale(16)),
-                  //       overlayColor: Colors.white.withOpacity(0.1),
-                  //     ),
-                  //     child: Text(
-                  //       'Назад',
-                  //       style: TextStyle(color: Colors.white, fontSize: scale(20)),
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             ],

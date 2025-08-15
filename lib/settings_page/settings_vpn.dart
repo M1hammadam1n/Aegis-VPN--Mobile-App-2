@@ -11,13 +11,7 @@ class SettingsVpn extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final w = size.width;
     final h = size.height;
-
-    // Ограничим максимальную ширину контента
     final maxContentWidth = w > 600 ? 600.0 : w * 0.95;
-
-    // Размеры шрифтов и иконок подстраиваем под ширину экрана
-    final iconSizeRouting = w * 0.08 < 40 ? w * 0.08 : 40.0;
-    final iconSizeProtocols = w * 0.06 < 30 ? w * 0.06 : 30.0;
     final fontSizeTitle = w * 0.045 < 16 ? w * 0.045 : 16.0;
     final fontSizeDesc = w * 0.042 < 16 ? w * 0.042 : 16.0;
 
@@ -55,7 +49,6 @@ class SettingsVpn extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Первая кнопка (Роутинг)
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {
@@ -129,7 +122,6 @@ class SettingsVpn extends StatelessWidget {
                     const Divider(thickness: 0.8, color: Colors.white12),
                     SizedBox(height: h * 0.015),
 
-                    // Вторая кнопка (Протоколы)
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
                       onTap: () {

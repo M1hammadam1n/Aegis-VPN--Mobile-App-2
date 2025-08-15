@@ -37,7 +37,6 @@ class PaymentErrorPage extends StatelessWidget {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Вернуть true — чтобы родитель (TariffPurchasePage) понял, что нужно повторить и очистить поле
                       Navigator.pop(context, true);
                     },
                     style: ElevatedButton.styleFrom(

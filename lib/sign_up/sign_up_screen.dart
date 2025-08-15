@@ -59,7 +59,6 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
 
-                  // Содержимое
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: isSmallScreen ? 20 : 30,
@@ -78,7 +77,9 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+
                         SizedBox(height: isSmallScreen ? 8 : 12),
+
                         Text(
                           'Создайте аккаунт любым удобным \nдля вас методом, доступным ниже.',
                           style: TextStyle(
@@ -88,9 +89,9 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
+
                         const Spacer(flex: 3),
 
-                        // Кнопка E-Mail
                         _buildAuthButton(
                           context: context,
                           iconWidget: SvgPicture.asset(
@@ -112,7 +113,6 @@ class SignUpScreen extends StatelessWidget {
 
                         SizedBox(height: isSmallScreen ? 12 : 16),
 
-                        // Кнопки Apple и Google
                         Row(
                           children: [
                             Expanded(
@@ -127,7 +127,9 @@ class SignUpScreen extends StatelessWidget {
                                 onPressed: () {},
                               ),
                             ),
+
                             SizedBox(width: isSmallScreen ? 8 : 12),
+
                             Expanded(
                               child: _buildAuthButton(
                                 context: context,
@@ -142,6 +144,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+
                         SizedBox(height: isSmallScreen ? 16 : 24),
                       ],
                     ),
@@ -187,7 +190,9 @@ class SignUpScreen extends StatelessWidget {
               height: isSmallScreen ? 24 : 28,
               child: iconWidget,
             ),
+
             SizedBox(width: isSmallScreen ? 8 : 12),
+
             Text(
               text,
               style: TextStyle(

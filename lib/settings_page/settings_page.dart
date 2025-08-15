@@ -2,7 +2,6 @@ import 'package:aegis_vpn/settings_page/account_settings.dart';
 import 'package:aegis_vpn/settings_page/purchase%20_of_tariff.dart';
 import 'package:aegis_vpn/settings_page/settings_vpn.dart';
 import 'package:aegis_vpn/settings_page/tariffcard.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -97,7 +96,6 @@ class SettingsPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Первая кнопка
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -113,7 +111,6 @@ class SettingsPage extends StatelessWidget {
                             'assets/icons/Frame2085661612.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -151,11 +148,11 @@ class SettingsPage extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     SizedBox(height: w * 0.025),
                     const Divider(thickness: 0.8, color: Colors.white12),
                     SizedBox(height: w * 0.025),
 
-                    // Вторая кнопка
                     InkWell(
                       onTap: () {
                         Navigator.push(
@@ -171,7 +168,6 @@ class SettingsPage extends StatelessWidget {
                             'assets/icons/rame2085661612.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -224,16 +220,13 @@ class SettingsPage extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
-                      onTap: () {
-                        print("Оцените приложение нажаты");
-                      },
+                      onTap: () {},
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/icons/2085661612.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -262,16 +255,13 @@ class SettingsPage extends StatelessWidget {
                     SizedBox(height: w * 0.025),
 
                     InkWell(
-                      onTap: () {
-                        print("Пригласите друзей нажаты");
-                      },
+                      onTap: () {},
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/icons/085661612.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -300,16 +290,13 @@ class SettingsPage extends StatelessWidget {
                     SizedBox(height: w * 0.025),
 
                     InkWell(
-                      onTap: () {
-                        print("Правила пользования нажаты");
-                      },
+                      onTap: () {},
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/icons/2.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.02),
                           Expanded(
@@ -338,16 +325,13 @@ class SettingsPage extends StatelessWidget {
                     SizedBox(height: w * 0.025),
 
                     InkWell(
-                      onTap: () {
-                        print("Политика конфиденциальности нажаты");
-                      },
+                      onTap: () {},
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/icons/4.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -376,16 +360,13 @@ class SettingsPage extends StatelessWidget {
                     SizedBox(height: w * 0.025),
 
                     InkWell(
-                      onTap: () {
-                        print("Написать в поддержку нажаты");
-                      },
+                      onTap: () {},
                       child: Row(
                         children: [
                           SvgPicture.asset(
                             'assets/icons/7.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(
@@ -428,7 +409,6 @@ class SettingsPage extends StatelessWidget {
                             'assets/icons/9.svg',
                             width: (w * 0.08).clamp(24.0, 40.0),
                             height: (w * 0.08).clamp(24.0, 40.0),
-                            color: Colors.white,
                           ),
                           SizedBox(width: w * 0.025),
                           Expanded(

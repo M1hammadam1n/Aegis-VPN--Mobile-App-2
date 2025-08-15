@@ -51,17 +51,13 @@ class ServersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Получаем размеры экрана
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
 
-    // Функция для масштабирования шрифта относительно ширины экрана
     double fontSize(double size) {
-      // Можно использовать clamp, чтобы шрифт не становился слишком маленьким или большим
       return (size * w / 400).clamp(10, 24);
     }
 
-    // Функция для адаптивных отступов/высот/ширин
     double adaptWidth(double size) => size * w / 400;
     double adaptHeight(double size) => size * h / 800;
 
@@ -102,9 +98,9 @@ class ServersPage extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: fontSize(14)),
               textAlign: TextAlign.start,
             ),
+
             SizedBox(height: adaptHeight(25)),
 
-            // Автоматический сервер
             Text(
               'Автоматический сервер',
               style: TextStyle(
@@ -187,7 +183,6 @@ class ServersPage extends StatelessWidget {
 
             SizedBox(height: adaptHeight(25)),
 
-            // Бесплатные сервера
             Text(
               'Бесплатные сервера',
               style: TextStyle(
@@ -196,6 +191,7 @@ class ServersPage extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+
             SizedBox(height: adaptHeight(20)),
 
             ...freeServers.map(
@@ -217,7 +213,6 @@ class ServersPage extends StatelessWidget {
 
             SizedBox(height: adaptHeight(25)),
 
-            // Рекомендованные сервера
             Text(
               'Рекомендованные сервера',
               style: TextStyle(
@@ -226,6 +221,7 @@ class ServersPage extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+
             SizedBox(height: adaptHeight(20)),
 
             ...recommendedServers.map(

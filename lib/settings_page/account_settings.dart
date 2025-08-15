@@ -111,7 +111,6 @@ class _AccountSettingsState extends State<AccountSettings> {
     final w = size.width;
     final h = size.height;
 
-    // Ограничение ширины контента, чтобы на очень широких экранах не растягивалось
     final maxContentWidth = w > 600 ? 600.0 : w * 0.95;
 
     return Scaffold(
@@ -138,7 +137,6 @@ class _AccountSettingsState extends State<AccountSettings> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Верх
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -166,12 +164,16 @@ class _AccountSettingsState extends State<AccountSettings> {
                     ),
                     style: TextStyle(color: Colors.white, fontSize: w * 0.04),
                   ),
+
                   SizedBox(height: h * 0.03),
+
                   Text(
                     '  Пароль',
                     style: TextStyle(color: Colors.white, fontSize: w * 0.045),
                   ),
+
                   SizedBox(height: h * 0.02),
+
                   TextField(
                     controller: passwordController,
                     cursorColor: Colors.white,
@@ -193,7 +195,7 @@ class _AccountSettingsState extends State<AccountSettings> {
                   ),
                 ],
               ),
-              // Низ
+
               Column(
                 children: [
                   SizedBox(
@@ -217,7 +219,9 @@ class _AccountSettingsState extends State<AccountSettings> {
                       ),
                     ),
                   ),
+
                   SizedBox(height: h * 0.015),
+
                   SizedBox(
                     width: double.infinity,
                     height: h * 0.07,

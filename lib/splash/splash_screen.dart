@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Картинка карты прижата к низу
           Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
@@ -35,24 +34,18 @@ class _SplashScreenState extends State<SplashScreen> {
               width: double.infinity,
             ),
           ),
-
-          // Градиент сверху (эффект "солнца")
           Positioned.fill(
             child: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.center,
-                  colors: [
-                    Color(0xFFFFA500), // жёлто-оранжевый
-                    Colors.transparent,
-                  ],
+                  colors: [Color(0xFFFFA500), Colors.transparent],
                 ),
               ),
             ),
           ),
 
-          // Логотип в центре
           Center(
             child: Image.asset(
               'assets/images/aegisvpn_new_page-0003.png',
@@ -61,7 +54,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
 
-          // Текст внизу
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(

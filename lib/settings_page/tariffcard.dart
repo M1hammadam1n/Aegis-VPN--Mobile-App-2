@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 class SubscriptionManager {
   TariffData? activeTariff;
 
-  // Singleton
   SubscriptionManager._privateConstructor();
   static final SubscriptionManager _instance =
       SubscriptionManager._privateConstructor();
@@ -46,7 +45,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       rootNavigator: true,
     ).push(MaterialPageRoute(builder: (_) => const PurchaseOfTariff()));
 
-    // Обновляем состояние после возврата (вдруг тариф изменился)
     setState(() {
       tariff = SubscriptionManager().activeTariff;
     });
@@ -55,22 +53,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   @override
   Widget build(BuildContext context) {
     if (tariff == null) {
-      // Нет подписки — показываем кнопку покупки
       return LayoutBuilder(
         builder: (context, constraints) {
           final maxWidth = constraints.maxWidth;
-          // Масштабируем размеры шрифтов и отступов под ширину контейнера
           double baseFontSizeTitle = 24;
           double baseFontSizeSubtitle = 15;
           double titleFontSize =
               baseFontSizeTitle * (maxWidth / 360).clamp(0.8, 1.2);
           double subtitleFontSize =
               baseFontSizeSubtitle * (maxWidth / 360).clamp(0.8, 1);
-          double buttonFontSize = 20 * (maxWidth / 360).clamp(0.8, 1.2);
           double paddingAll = 20 * (maxWidth / 360).clamp(0.8, 1.2);
-          double buttonHorizontalPadding =
-              40 * (maxWidth / 360).clamp(0.8, 1.2);
-          double buttonVerticalPadding = 15 * (maxWidth / 360).clamp(0.8, 1.2);
           double iconSize = 20 * (maxWidth / 360).clamp(0.8, 1.2);
 
           return Container(
@@ -140,53 +132,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     ),
                   ],
                 ),
-                // ElevatedButton(
-                //   onPressed: _goToPurchase,
-                //   style: ElevatedButton.styleFrom(
-                //     padding: EdgeInsets.symmetric(
-                //       horizontal: buttonHorizontalPadding,
-                //       vertical: buttonVerticalPadding,
-                //     ),
-                //     backgroundColor: Colors.white,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(30),
-                //     ),
-                //   ),
-                //   child: Row(
-                //     mainAxisSize: MainAxisSize.min,
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: [
-                //       SvgPicture.asset(
-                //         'assets/icons/10.svg',
-                //         width: iconSize,
-                //         height: iconSize,
-                //       ),
-                //       SizedBox(width: 6 * (maxWidth / 360).clamp(0.8, 1.2)),
-                //       Text(
-                //         'Купить подписку',
-                //         style: TextStyle(
-                //           fontSize: buttonFontSize,
-                //           fontWeight: FontWeight.bold,
-                //           color: Colors.black,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           );
         },
       );
     } else {
-      // Отображаем активный тариф
       return LayoutBuilder(
         builder: (context, constraints) {
-          final maxWidth = constraints.maxWidth;
           final maxHeight =
               constraints.maxHeight > 0 ? constraints.maxHeight : 120.0;
-
-          // Масштабируем шрифты и размеры элементов под доступный размер
           double baseHeight = 120;
           double heightFactor = (maxHeight / baseHeight).clamp(0.8, 1.0);
           double baseFontSizeTitle = 22;
@@ -213,7 +168,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      // Заголовок тарифа
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         alignment: Alignment.centerLeft,
@@ -230,7 +184,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ),
                       Row(
                         children: [
-                          // Первый бейдж с длительностью
                           Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: 0 * heightFactor,
@@ -254,8 +207,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               ),
                             ),
                           ),
+
                           SizedBox(width: 5 * heightFactor),
-                          // Второй бейдж с оставшимися днями
+
                           Container(
                             padding: EdgeInsets.symmetric(
                               horizontal: 12 * heightFactor,
@@ -284,8 +238,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     ],
                   ),
                 ),
-
-                // Картинка справа
                 ClipRRect(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(25 * heightFactor),

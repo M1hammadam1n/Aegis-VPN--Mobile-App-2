@@ -1,5 +1,4 @@
 import 'package:aegis_vpn/bottomnavigationbar/bottom_navigation_bar.dart';
-import 'package:aegis_vpn/general/general_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -43,7 +42,6 @@ class _SingUpSmsState extends State<SingUpSms> {
       } else {
         FocusScope.of(context).unfocus();
 
-        // Если введено полностью — сразу проверяем и переходим
         if (_code.length == codeLength) {
           _validateAndNavigate();
         }
@@ -78,33 +76,27 @@ class _SingUpSmsState extends State<SingUpSms> {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     final height = size.height;
-
-    // Базовые размеры от высоты экрана (можно подстроить)
-    final verticalSpacingLarge = height * 0.06; // вместо 50
-    final verticalSpacingSmall = height * 0.01; // вместо 8
-    final inputBoxWidth =
-        (width - 32 - 5 * 10) / 6; // горизонтальные паддинги + промежутки
-    final inputBoxHeight = height * 0.07; // около 55 при экране 6.6 дюймов
-
-    // Шрифты с масштабированием
-    final titleFontSize = height * 0.045; // около 36
-    final subtitleFontSize = height * 0.02; // около 16
-    final codeFontSize = height * 0.03; // около 24
-    final buttonFontSize = height * 0.025; // около 20
-
+    final verticalSpacingLarge = height * 0.06;
+    final verticalSpacingSmall = height * 0.01;
+    final inputBoxWidth = (width - 32 - 5 * 10) / 6;
+    final inputBoxHeight = height * 0.07;
+    final titleFontSize = height * 0.045;
+    final subtitleFontSize = height * 0.02;
+    final codeFontSize = height * 0.03;
+    final buttonFontSize = height * 0.025;
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.04), // вместо 16
+          padding: EdgeInsets.symmetric(horizontal: width * 0.04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Верхний блок
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: verticalSpacingLarge),
+
                   Text(
                     'Подтверждение',
                     style: TextStyle(
@@ -113,7 +105,9 @@ class _SingUpSmsState extends State<SingUpSms> {
                       color: Colors.white,
                     ),
                   ),
+
                   SizedBox(height: verticalSpacingSmall),
+
                   Text(
                     'Введите 6-ти значный код, который находится в письме, отправленный на вашу эл. почту.',
                     textAlign: TextAlign.center,
@@ -128,15 +122,11 @@ class _SingUpSmsState extends State<SingUpSms> {
 
               SizedBox(height: height * 0.05),
 
-              // Поля ввода кода
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(codeLength, (index) {
                   return SizedBox(
-                    width: inputBoxWidth.clamp(
-                      40,
-                      60,
-                    ), // ограничиваем по ширине
+                    width: inputBoxWidth.clamp(40, 60),
                     height: inputBoxHeight.clamp(45, 65),
                     child: RawKeyboardListener(
                       focusNode: FocusNode(),
@@ -185,7 +175,6 @@ class _SingUpSmsState extends State<SingUpSms> {
 
               const Spacer(),
 
-              // Ошибка поверх кнопки
               if (_showError)
                 Container(
                   margin: EdgeInsets.only(bottom: height * 0.015),
@@ -261,13 +250,12 @@ class _SingUpSmsState extends State<SingUpSms> {
               ),
 
               SizedBox(height: height * 0.008),
+
               SizedBox(
                 width: double.infinity,
                 height: height * 0.07,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Логика повторной отправки кода или возврата назад
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white12,
                     shape: RoundedRectangleBorder(

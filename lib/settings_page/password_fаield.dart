@@ -8,7 +8,7 @@ class PasswordField extends StatefulWidget {
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  bool _obscureText = true; // по умолчанию пароль скрыт
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _PasswordFieldState extends State<PasswordField> {
           ),
           onPressed: () {
             setState(() {
-              _obscureText = !_obscureText; // меняем видимость
+              _obscureText = !_obscureText;
             });
           },
         ),

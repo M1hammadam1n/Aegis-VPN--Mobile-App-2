@@ -12,7 +12,7 @@ class NavigationExample extends StatefulWidget {
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
-  int currentPageIndex = 1; // Начинаем с GeneralScreens (индекс 1)
+  int currentPageIndex = 1;
 
   final List<GlobalKey<NavigatorState>> navigatorKeys = [
     GlobalKey<NavigatorState>(),

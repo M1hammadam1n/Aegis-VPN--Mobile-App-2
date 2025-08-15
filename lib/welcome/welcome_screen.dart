@@ -9,16 +9,12 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool isSmallScreen = size.height < 600;
-    // Рассчитываем динамические отступы, которые будут меньше на маленьких экранах
     final double verticalSpacingLarge =
         size.height < 600 ? size.height * 0.05 : size.height * 0.08;
     final double verticalSpacingSmall =
         size.height < 600 ? size.height * 0.008 : size.height * 0.01;
     final double buttonHeight = size.height < 600 ? 44 : 55;
-
-    // Размеры изображения с учетом пропорций
-    final double imageAspectRatio =
-        375 / 812; // Примерное соотношение сторон оригинального изображения
+    final double imageAspectRatio = 375 / 812;
     final double backgroundImageHeight =
         isSmallScreen
             ? size.width / imageAspectRatio * 0.5
@@ -41,7 +37,6 @@ class WelcomeScreen extends StatelessWidget {
         top: false,
         child: Column(
           children: [
-            // Центрированное изображение
             Center(
               child: SizedBox(
                 width: size.width,
@@ -72,15 +67,12 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // Остальной контент с адаптивным паддингом и отступом снизу для navbar
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(
                   left: (size.width * 0.05).clamp(16, 32),
                   right: (size.width * 0.05).clamp(16, 32),
-                  bottom:
-                      MediaQuery.of(context).padding.bottom +
-                      16, // Вот этот отступ!
+                  bottom: MediaQuery.of(context).padding.bottom + 16,
                 ),
                 child: SingleChildScrollView(
                   physics: const NeverScrollableScrollPhysics(),
@@ -130,6 +122,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
 
                       SizedBox(height: verticalSpacingLarge),
+
                       SizedBox(
                         height: buttonHeight,
                         child: ElevatedButton(
@@ -158,7 +151,9 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       SizedBox(height: verticalSpacingSmall),
+
                       TextButton(
                         style: ButtonStyle(
                           overlayColor: MaterialStateProperty.all(
@@ -182,7 +177,6 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
 
-                      // Добавляем нижний отступ, чтобы не прятаться за navbar:
                       SizedBox(
                         height: MediaQuery.of(context).padding.bottom + 14,
                       ),

@@ -51,7 +51,9 @@ class _SitesWidgetState extends State<SitesWidget> {
                             fit: BoxFit.cover,
                           ),
                         ),
+
                         SizedBox(height: 15),
+
                         const Text(
                           'Добавьте сайт',
                           style: TextStyle(
@@ -60,7 +62,9 @@ class _SitesWidgetState extends State<SitesWidget> {
                             color: Colors.white,
                           ),
                         ),
+
                         const SizedBox(height: 15),
+
                         const Text(
                           'Вставьте или введите URL-адрес веб-сайта.',
                           style: TextStyle(
@@ -69,7 +73,9 @@ class _SitesWidgetState extends State<SitesWidget> {
                             color: Colors.white70,
                           ),
                         ),
+
                         const SizedBox(height: 15),
+
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -82,9 +88,11 @@ class _SitesWidgetState extends State<SitesWidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
+
                             const SizedBox(height: 15),
+
                             TextField(
-                              controller: controller, // <-- добавь эту строчку
+                              controller: controller,
                               obscureText: false,
                               cursorColor: Colors.white,
                               decoration: InputDecoration(
@@ -104,7 +112,9 @@ class _SitesWidgetState extends State<SitesWidget> {
                             ),
                           ],
                         ),
+
                         const Spacer(),
+
                         SizedBox(
                           width: double.infinity,
                           height: 50,
@@ -175,7 +185,9 @@ class _SitesWidgetState extends State<SitesWidget> {
               fontWeight: FontWeight.w500,
             ),
           ),
+
           const SizedBox(height: 10),
+
           const Text(
             'Выберите веб-сайты для обхода VPN.',
             style: TextStyle(
@@ -184,9 +196,9 @@ class _SitesWidgetState extends State<SitesWidget> {
               fontWeight: FontWeight.w400,
             ),
           ),
+
           const SizedBox(height: 10),
 
-          // Список добавленных сайтов
           ...sites.asMap().entries.map((entry) {
             final i = entry.key;
             final site = entry.value;

@@ -12,14 +12,12 @@ class SingUpEmail extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // === Верхний блок ===
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  SizedBox(height: 50), // отступ сверху
+                  SizedBox(height: 50),
                   Text(
                     'Регистрация',
                     style: TextStyle(
@@ -28,7 +26,9 @@ class SingUpEmail extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+
                   SizedBox(height: 8),
+
                   Text(
                     'Введите адрес электронной почты\nдля регистрации в Aegis VPN.',
                     textAlign: TextAlign.start,
@@ -41,13 +41,15 @@ class SingUpEmail extends StatelessWidget {
                 ],
               ),
 
-              // === Средний блок ===
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 15),
+
                   Divider(thickness: 0.8, color: Colors.white12),
+
                   const SizedBox(height: 15),
+
                   const Text(
                     'Электронная почта',
                     style: TextStyle(
@@ -56,7 +58,9 @@ class SingUpEmail extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+
                   const SizedBox(height: 10),
+
                   TextField(
                     obscureText: false,
                     cursorColor: Colors.white,
@@ -75,8 +79,9 @@ class SingUpEmail extends StatelessWidget {
                   ),
                 ],
               ),
+
               const Spacer(),
-              // === Нижний блок (кнопки) ===
+
               Column(
                 children: [
                   SizedBox(

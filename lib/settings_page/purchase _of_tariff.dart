@@ -56,35 +56,24 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
           final w = constraints.maxWidth;
           final h = constraints.maxHeight;
           final isSmall = w < 360;
-
-          // Адаптивные размеры
           final durationFont =
               (w * 0.055 * (isSmall ? 0.9 : 1)).clamp(14.0, 22.0) * textScale;
           final subtitleFont =
               (w * 0.045 * (isSmall ? 0.9 : 1)).clamp(12.0, 18.0) * textScale;
-          final priceFont = (w * 0.045).clamp(12.0, 18.0) * textScale;
           final buttonFont = (w * 0.055).clamp(16.0, 22.0) * textScale;
           final cardPadding = w * 0.04;
           final cardHeight = isSmall ? 70.0 : 80.0;
 
           return SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                w * 0.04, // слева
-                0, // сверху
-                w * 0.04, // справа
-                8, // снизу — подняли всё на 8px
-              ),
+              padding: EdgeInsets.fromLTRB(w * 0.04, 0, w * 0.04, 8),
               child: Column(
                 children: [
                   const WingsTitle(),
                   SizedBox(height: h * 0.02),
-
-                  // Список тарифов
                   ...List.generate(tariffs.length, (index) {
                     final tariff = tariffs[index];
                     final bool isSelected = selectedIndex == index;
-
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: GestureDetector(
@@ -102,7 +91,6 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Левая часть
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -133,14 +121,10 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                                   ),
                                 ],
                               ),
-
-                              // Правая часть
-                              // Правая часть
                               Row(
                                 children: [
                                   ConstrainedBox(
                                     constraints: BoxConstraints(
-                                      // Минимум 90px, максимум 38% ширины экрана
                                       minWidth: w * 0.25,
                                       maxWidth: w * 0.35,
                                     ),
@@ -169,7 +153,9 @@ class _PurchaseOfTariffState extends State<PurchaseOfTariff> {
                                       ),
                                     ),
                                   ),
+
                                   SizedBox(width: w * 0.02),
+
                                   Checkbox(
                                     value: isSelected,
                                     onChanged:

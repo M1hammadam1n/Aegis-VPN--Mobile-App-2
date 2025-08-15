@@ -141,6 +141,7 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         SizedBox(height: height * 0.015),
 
                         SizedBox(
@@ -162,9 +163,10 @@ class SignInScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                // size: buttonHeight * 0.45,
                                 SvgPicture.asset('assets/icons/Telegram.svg'),
+
                                 SizedBox(width: width * 0.02),
+
                                 Text(
                                   'Войти с Telegram',
                                   style: TextStyle(
@@ -176,6 +178,7 @@ class SignInScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         SizedBox(height: height * 0.015),
 
                         Row(
@@ -202,7 +205,9 @@ class SignInScreen extends StatelessWidget {
                                       SvgPicture.asset(
                                         'assets/icons/AppleOriginal.svg',
                                       ),
+
                                       SizedBox(width: width * 0.02),
+
                                       Text(
                                         'Apple',
                                         style: TextStyle(
@@ -215,7 +220,9 @@ class SignInScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+
                             SizedBox(width: width * 0.02),
+
                             Expanded(
                               child: SizedBox(
                                 height: buttonHeight,
