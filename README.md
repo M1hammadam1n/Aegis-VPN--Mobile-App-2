@@ -1,16 +1,32 @@
-# aegis_vpn
+# VPN App UI — Flutter
 
-A new Flutter project.
+[![Flutter](https://img.shields.io/badge/Flutter-UI-blue)](#)
+[![Platform](https://img.shields.io/badge/Android-iOS-success)](#)
+[![License](https://img.shields.io/badge/License-MIT-lightgrey)](#)
 
-## Getting Started
+Готовый шаблон интерфейса VPN-приложения на **Flutter**.
+Проект включает только верстку экранов, без серверной части и реальной VPN-функциональности.
+Подходит для демонстраций, прототипов и интеграции в полноценное приложение.
 
-This project is a starting point for a Flutter application.
+## 📌 Что внутри
 
-A few resources to get you started if this is your first Flutter project:
+* **Главный экран подключения** — кнопка connect/disconnect, статус, время сессии
+* **Список серверов/локаций** — карточки с флагами и названиями
+* **Избранные сервера** — выделение и сортировка по избранному (UI)
+* **Онбординг** — приветственные слайды при первом запуске
+* **Экран настроек** — переключатели и элементы управления (фиктивные)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🚀 Запуск
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+# Клонируйте проект
+git clone https://github.com/username/vpn-ui-flutter.git
+cd Aegis-VPN--Mobile-App-2
+
+# Установите зависимости
+flutter pub get
+
+# Запустите на эмуляторе или устройстве
+flutter run
+```
+
